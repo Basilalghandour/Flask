@@ -5,7 +5,7 @@ from market.forms import RegisterForm, LoginForm
 from market import db
 from market import bcrypt
 from market import models
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user, login_required
 @app.route("/")
 @app.route("/home")
 
@@ -14,7 +14,7 @@ def home_page():
 
 @app.route("/market")
 
-
+@login_required
 
 def market_page():
  
@@ -34,6 +34,8 @@ def register_page():
         # user_to_create.password = bcrypt.generate_password_hash(form.password1.data).decode('utf-8')
         db.session.add(user_to_create)
         db.session.commit()
+        login_user(user_to_create)
+        flash(f'Account created successfully! You are now logged in as: {user_to_create.username}', category='success')
         return redirect(url_for('market_page'))
         
     if form.errors !={}:  
@@ -62,3 +64,9 @@ def login_page():
             flash(f'Username and password do not match! Please try again', category='danger')
                
     return render_template('Login.html',form=form)
+
+@app.route('/logout')
+def logout_page():
+    logout_user()
+    flash('You have been logged out!', category='info')
+    return redirect(url_for('home_page'))
