@@ -4,11 +4,25 @@
         {% endblock %}
 
         {% block content %}
+
+                           <style>
+
+.logoxx {
+    width: 150px !important;
+    height: auto !important;
+    border-radius: 75px;
+    margin-bottom: 15px;
+    margin-top: 9px;
+    }
+
+
+        </style>
+
     <body class="text-center">
          <div class="container">
         <form method="POST" class="form-signin" style="color:white">
             {{ form.hidden_tag() }}
-            <img class="mb-4" src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png" alt="">
+            <img class="logoxx" src="{{ url_for('static', filename='Photos/logo.jpg') }}" alt="">
             <h1 class="h3 mb-3 font-weight-normal">
                 Please Login
             </h1>
@@ -26,6 +40,7 @@
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
 
                         <div class="checkbox mb-3">
+                            <br>
                <h6>Do not have an account?</h6>
                <a class="btn btn-sm btn-secondary" href="{{ url_for('register_page') }}">Register</a>
             </div>
