@@ -52,7 +52,25 @@
       </div>
 
       <div class="modal-body">
-        Are you sure you want to buy {{item.name}} for {{item.price}}$ ? 
+        
+
+        <form method="POST">
+            {{ purchase_form.hidden_tag() }}
+            
+            
+            <h4 class="text-center">
+                Are you sure you want to buy {{item.name}} for {{item.price}}$ ?
+             </h4>
+             <br>
+             <h6 class="text-center">
+                by purchasing this item, you will be charged from your budget.
+             </h6>
+             <br>
+             <input id="purchased_item" name="purchased_item" type="hidden" value="{{ item.name }}">
+             <h6> {{ purchase_form.submit(class="btn btn-outline-success btn-block ") }}
+             </h6>
+
+        </form>
         
       </div>
       <div class="modal-footer">
